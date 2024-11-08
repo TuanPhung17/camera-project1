@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera View</title>
+</head>
+<body>
+    <video id="videoElement" width="100%" height="auto" autoplay></video>
+    <script>
+        navigator.mediaDevices.getUserMedia({
+            video: { facingMode: { exact: "environment" } }
+        })
+        .then(function(stream) {
+            let videoElement = document.querySelector('#videoElement');
+            if (videoElement) {
+                videoElement.srcObject = stream;
+                videoElement.play();
+            }
+        })
+        .catch(function(error) {
+            console.error("Lỗi khi mở camera: ", error);
+            alert("Không thể mở camera. Kiểm tra cài đặt hoặc quyền truy cập.");
+        });
+    </script>
+</body>
+</html>
